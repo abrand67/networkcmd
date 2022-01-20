@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 __author__ = 'Allan Brand'
-__copyright__ = 'Copyright 2019'
+__copyright__ = 'Copyright 2018'
 __credits__ = ['Allan Brand']
 __license__ = 'Apache v2.0'
 __version__ = '0.9.0'

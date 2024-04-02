@@ -58,40 +58,40 @@ parser = argparse.ArgumentParser()
 grpCmd = parser.add_mutually_exclusive_group(required=True)
 grpHst = parser.add_mutually_exclusive_group(required=True)
 parser.add_argument('-u', '--username',
-					help='define the username')
+		    help='define the username')
 parser.add_argument('-P', '--protocol',
-					required=False,
-					choices=['ssh', 'telnet'],
-					default='ssh',
-					help='define connection protocol')
+		    required=False,
+		    choices=['ssh', 'telnet'],
+		    default='ssh',
+		    help='define connection protocol')
 parser.add_argument('-p', '--port',
                     required=False,
-					type=int,
-					choices=range(0,65535),
-					help='define the port number to connect to')
+		    type=int,
+		    choices=range(0,65535),
+		    help='define the port number to connect to')
 parser.add_argument('-w', '--wait',
                     required=False,
- 					type=int,
-					help='define delay time for the next prompt')
+ 		    type=int,
+		    help='define delay time for the next prompt')
 parser.add_argument('-M', '--multithread',
-					help='process commands on multiple devices simultaneously')
+		    help='process commands on multiple devices simultaneously')
 parser.add_argument('-l', '--log',
                     required=False,
- 					help='define a logfile prefix')
+ 		    help='define a logfile prefix')
 #
 # Functionality to be added later
 # parser.add_argument('-a', '--append',
-#                    required=False,
-# 					action='store_true',
-#					help='log will be appended to existing file')
+#                     required=False,
+# 		      action='store_true',
+#		      help='log will be appended to existing file')
 grpCmd.add_argument('-c', '--cmd',
-					help='define the command to send')
+		    help='define the command to send')
 grpCmd.add_argument('-r', '--runfile',
-					help='define a file with a set of command to send')
+		    help='define a file with a set of command to send')
 grpHst.add_argument('-t', '--target',
-					help='define the hostname to connect')
+		    help='define the hostname to connect')
 grpHst.add_argument('-T', '--targetfile',
-					help='define a target file (one host per line)')
+		    help='define a target file (one host per line)')
 args = parser.parse_args()
 
 
@@ -141,7 +141,8 @@ def single_Telnet(ip):
 			print(t.read_all().decode('ascii'))
 
 def threaded_Telnet(i, q):
-
+	# WIP
+	pass
 
 def Threaded_Operation():
 	for i in range(nThreads):

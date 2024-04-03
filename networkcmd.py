@@ -55,6 +55,11 @@ parser.add_argument('-P', '--protocol',
 		    choices=['ssh', 'telnet'],
 		    default='ssh',
 		    help='define connection protocol')
+parser.add_argument('-D', '--devicetype',
+		    required=False,
+		    choices=['autodetect', 'arista_eos', 'cisco_ios', 'cisco_nxos', 'cisco_xe', 'cisco_xr', 'juniper_junos', 'paloalto_panos', 'fortinet'],
+		    default='autodetect',
+		    help='select the device platform')
 parser.add_argument('-p', '--port',
                     required=False,
 		    type=int,
@@ -103,7 +108,7 @@ else:
 
 def single_SSH(ip):
 	try:
-		conn = Netmiko(host=ip, device_type='autodetect', username=uname, password=pword, auth_timeout=60, session_log=logFile)
+		conn = Netmiko(host=ip, device_type=args.devicetype, username=uname, password=pword, auth_timeout=60, session_log=logFile)
 		conn.find_prompt()
 		for cmd in cmd_list:
 			conn.send_command(cmd)
@@ -119,7 +124,7 @@ def threaded_SSH(i, q):
 	while True:
 		ip = q.get()
 		try:
-			conn = Netmiko(host=ip, device_type='autodetect', username=uname, password=pword, auth_timeout=60, session_log=logFile)
+			conn = Netmiko(host=ip, device_type=args.devicetype, username=uname, password=pword, auth_timeout=60, session_log=logFile)
 			conn.find_prompt()
 			for cmd in cmd_list:
 				conn.send_command(cmd)

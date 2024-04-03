@@ -70,6 +70,7 @@ parser.add_argument('-w', '--wait',
  		    type=int,
 		    help='define delay time for the next prompt')
 parser.add_argument('-M', '--multithread',
+		    required=False,
 		    help='process commands on multiple devices simultaneously')
 parser.add_argument('-l', '--log',
                     required=False,
@@ -98,7 +99,7 @@ else:
 if args.wait:
 	CMD_DELAY = args.wait
 else:
-	CMD_DELAY = 1
+	CMD_DELAY = 0.25
 
 if args.log:
 	logFile = args.log + ip + '.log'

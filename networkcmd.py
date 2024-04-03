@@ -145,13 +145,13 @@ def threaded_Telnet(i, q):
 	pass
 
 def Threaded_Operation():
+	for d in list_dev:
+		eQueue.put(d)
+
 	for i in range(nThreads):
 		thread = threading.Thread(target=threaded_SSH, args=(i, eQueue,))
 		thread.daemon = True
 		thread.start()
-
-	for d in list_dev:
-		eQueue.put(d)
 
 	eQueue.join()
 

@@ -41,15 +41,6 @@ eQueue = Queue()
 tLock = threading.Lock()
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-if args.port:
-	PORT = args.port
-else:
-	PORT = 22
-
-if args.wait:
-	CMD_DELAY = args.wait
-else:
-	CMD_DELAY = 1
 
 #
 # Configure Command-line Arguments
@@ -94,10 +85,25 @@ grpHst.add_argument('-T', '--targetfile',
 		    help='define a target file (one host per line)')
 args = parser.parse_args()
 
+if args.port:
+	PORT = args.port
+else:
+	PORT = 22
+
+if args.wait:
+	CMD_DELAY = args.wait
+else:
+	CMD_DELAY = 1
+
+if args.log:
+	logFile = args.log + ip + '.log'
+else:
+	logFile = ip + '.log'
+
 
 def single_SSH(ip):
 	try:
-		conn = Netmiko(host=ip, device_type='autodetect', username=uname, password=pword, auth_timeout=60, session_log=ip + '.log')
+		conn = Netmiko(host=ip, device_type='autodetect', username=uname, password=pword, auth_timeout=60, session_log=logFile)
 		conn.find_prompt()
 		for cmd in cmd_list:
 			conn.send_command(cmd)
@@ -113,7 +119,7 @@ def threaded_SSH(i, q):
 	while True:
 		ip = q.get()
 		try:
-			conn = Netmiko(host=ip, device_type='autodetect', username=uname, password=pword, auth_timeout=60, session_log=ip + '.log')
+			conn = Netmiko(host=ip, device_type='autodetect', username=uname, password=pword, auth_timeout=60, session_log=logFile)
 			conn.find_prompt()
 			for cmd in cmd_list:
 				conn.send_command(cmd)

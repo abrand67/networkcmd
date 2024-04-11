@@ -91,21 +91,6 @@ grpHst.add_argument('-T', '--targetfile',
 		    help='define a target file (one host per line)')
 args = parser.parse_args()
 
-if args.port:
-	PORT = args.port
-else:
-	PORT = 22
-
-if args.wait:
-	CMD_DELAY = args.wait
-else:
-	CMD_DELAY = 0.25
-
-if args.log:
-	logFile = args.log + ip + '.log'
-else:
-	logFile = ip + '.log'
-
 
 def single_SSH(ip):
 	try:
@@ -198,6 +183,23 @@ if__name__== "__main__":
 			for line in f:
 				cmd_list.append(line)
 
+	#
+	# Misc
+	###############################################
+	if args.port:
+		PORT = args.port
+	else:
+		PORT = 22
+
+	if args.wait:
+		CMD_DELAY = args.wait
+	else:
+		CMD_DELAY = 0.25
+
+	if args.log:
+		logFile = args.log + ip + '.log'
+	else:
+		logFile = ip + '.log'
 
 	#
 	# Process commands

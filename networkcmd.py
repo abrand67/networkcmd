@@ -23,15 +23,15 @@ __maintainer__ = 'Allan Brand'
 __email__ = 'allan.brand@gmail.com'
 __status__ = 'Development'
 
-import argparse
-import time
 import os
+import time
 import signal
+import argparse
 import threading
+from queue import Queue
 from getpass import getpass
 from netmiko import Netmiko
 from netmiko import ssh_exception
-from queue import Queue
 from dotenv import load_dotenv
 
 #
